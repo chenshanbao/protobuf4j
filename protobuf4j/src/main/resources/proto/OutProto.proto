@@ -1,0 +1,11 @@
+option java_package = "com.game37.protobuf4j.proto";
+import "InnerProto.proto";
+message OutProto{
+
+	repeated int32 int1 = 1;
+	repeated string string = 2;
+	repeated int64 long = 3;
+	optional InnerProto innerProto2 = 4;
+	repeated InnerProto innerProto = 5;
+	
+}

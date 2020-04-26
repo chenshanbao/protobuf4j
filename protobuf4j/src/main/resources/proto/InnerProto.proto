@@ -1,0 +1,10 @@
+option java_package = "com.game37.protobuf4j.proto";
+message InnerProto{
+
+	optional int64 id=1; 
+	
+	optional int32 id2=2; 
+	
+	optional string name=3; 
+	
+}
