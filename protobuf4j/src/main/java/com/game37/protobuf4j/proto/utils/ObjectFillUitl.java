@@ -26,7 +26,6 @@ import java.util.function.Supplier;
 
 /**
 * author chenshanbao
-* create time 2020年3月13日 
 **/
 
 public class ObjectFillUitl {

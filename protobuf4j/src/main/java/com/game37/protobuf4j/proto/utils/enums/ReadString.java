@@ -9,7 +9,6 @@ import javassist.CtClass;
 
 /**
 * author chenshanbao
-* create time 2020年3月5日 上午9:57:09
 **/
 
 public enum ReadString {

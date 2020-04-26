@@ -14,7 +14,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
 * author chenshanbao
-* create time 2020年3月10日 上午10:27:12
 **/
 
 public class MonitorUtil {

@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
 * author chenshanbao
-* create time 2020年3月10日 上午10:40:09
 **/
 
 public class FileUtil {

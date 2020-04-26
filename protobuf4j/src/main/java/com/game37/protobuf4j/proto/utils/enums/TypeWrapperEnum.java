@@ -7,7 +7,6 @@ import com.game37.protobuf4j.proto.utils.WireFormatCopy.FieldType;
 
 /**
 * author chenshanbao
-* create time 2020年3月5日 上午9:46:30
 **/
 
 public enum TypeWrapperEnum {

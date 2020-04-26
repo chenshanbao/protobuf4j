@@ -20,6 +20,6 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface ProtobufField {
 	
-	String  value() default "default666";
+	String  value() default "";
 
 }

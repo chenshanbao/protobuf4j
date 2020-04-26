@@ -9,13 +9,11 @@ import java.util.Map;
 import com.game37.protobuf4j.proto.utils.enums.TypeWrapperEnum;
 import com.google.protobuf.WireFormat;
 
-import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
 /**
 * author chenshanbao
-* create time 2020年1月9日 下午6:31:04
 **/
 
 public class TypeUtil {

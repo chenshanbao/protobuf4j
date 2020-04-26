@@ -27,7 +27,6 @@ import javassist.bytecode.FieldInfo;
 
 /**
 * author chenshanbao
-* create time 2020年1月15日 下午4:29:33
 **/
 
 public class ClassModifyUtil {
