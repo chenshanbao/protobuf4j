@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.alibaba.fastjson.JSONObject;
+import com.game37.protobuf4j.codec.ProtobufCodec;
 import com.game37.protobuf4j.proto.utils.ObjectFillUitl;
 
 /**
@@ -28,6 +29,19 @@ public class MonitorUtil {
 		executorService.execute(()->checkAndLogEncode0(className, data, dataNew));
 		
 	}
+	
+	public static void checkAndLogEncode(String className, byte[] data, ProtobufCodec<?> proto) {
+		
+		executorService.execute(()->{
+			try {
+				byte[] dataNew = proto.encode();
+				checkAndLogEncode0(className, data, dataNew);
+			}catch(Exception e) {
+			}
+		});
+		
+	}
+	
 		
 	private static void checkAndLogEncode0(String className, byte[] data, byte[] dataNew) {
 		
@@ -47,6 +61,12 @@ public class MonitorUtil {
 	public static void checkAndLogDecode(String className, byte[] data, Object obj, Object objNew) {
 		executorService.execute(()->checkAndLogDecode0(className, data, obj, objNew));
 	}
+	
+	public static void checkAndLogDecode(String className, byte[] data, Object obj, ProtobufCodec<?> proto) {
+		executorService.execute(()->checkAndLogDecode0(className, data, obj, proto.decode(data)));
+	}
+	
+	
 	private static void checkAndLogDecode0(String className, byte[] data, Object obj, Object objNew) {
 		
 		try {
