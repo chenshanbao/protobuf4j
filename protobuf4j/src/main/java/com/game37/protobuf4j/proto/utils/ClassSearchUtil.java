@@ -118,7 +118,7 @@ public class ClassSearchUtil {
 				if(System.getProperties().get("os.name").toString().toLowerCase().contains("win")) {				
 					fName = f.getAbsolutePath().replaceAll("\\"+File.separatorChar, ".");
 				} else {
-					fName = f.getAbsolutePath().replaceAll("/"+File.separatorChar, ".");
+					fName = f.getAbsolutePath().replaceAll(""+File.separatorChar, ".");
 				}
 
 				int index = fName.lastIndexOf(packageName);
