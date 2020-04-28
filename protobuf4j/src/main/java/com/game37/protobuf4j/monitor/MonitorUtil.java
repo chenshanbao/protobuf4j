@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.game37.protobuf4j.proto.utils.ObjectFillUitl;
 
 /**
 * author chenshanbao
@@ -49,13 +49,15 @@ public class MonitorUtil {
 	}
 	private static void checkAndLogDecode0(String className, byte[] data, Object obj, Object objNew) {
 		
-		String s1  = JSONObject.toJSONString(obj, SerializerFeature.MapSortField, SerializerFeature.SortField);
-		String s2  = JSONObject.toJSONString(objNew, SerializerFeature.MapSortField, SerializerFeature.SortField);
-		if(s1.equals(s2)) {
-			return;
-		}	
-		FileUtil.writeData(wrapperString(className, data, TYPE_DECODE));
-		
+		try {
+			boolean flag = ObjectFillUitl.deepEquals(obj, objNew, false);
+			if(flag) {
+				return;
+			}
+			FileUtil.writeData(wrapperString(className, data, TYPE_DECODE));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public static void analyze(LocalDate date) throws IOException {

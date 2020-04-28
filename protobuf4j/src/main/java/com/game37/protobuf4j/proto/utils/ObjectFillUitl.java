@@ -227,10 +227,9 @@ public class ObjectFillUitl {
 		return null;
 	}
 	
-	public static Enum getEnum(Class<?> type) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public static Object getEnum(Class<?> type) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//
-		Method method = type.getDeclaredMethod("values");
-		Enum[] array = (Enum[]) method.invoke(null);
+		Object[] array = type.getEnumConstants();
 		return array[random.nextInt(array.length)];
 	}
 	
@@ -251,7 +250,7 @@ public class ObjectFillUitl {
 	}
 	
 	/**
-	 * 	如果属性 含有set只能对比hashcode的累加值了；一定要重写hash和equals方法
+	 * 	如果属性 含有set集合，集合元素一定要重写hash和equals方法
 	 * @param a
 	 * @param b
 	 * @return
@@ -413,14 +412,15 @@ public class ObjectFillUitl {
 			return true;
 		}
 		//
-		BigInteger bigIntegerA = new BigInteger("0");
-		BigInteger bigIntegerB = new BigInteger("0");
-		aArray.forEach(temp->bigIntegerA.add(new BigInteger(
-				Integer.toString(Math.abs(temp.hashCode())))));
-		bArray.forEach(temp->bigIntegerA.add(new BigInteger(
-				Integer.toString(Math.abs(temp.hashCode())))));
-		
-		return bigIntegerA.longValue() == bigIntegerB.longValue();
+		boolean flag = true;
+		Iterator<Object> it = aArray.iterator();
+		while(it.hasNext()) {
+			Object value = it.next();
+			if(!bArray.contains(value)) {
+				return false;
+			}
+		}
+		return flag;
 	}
 
 }
