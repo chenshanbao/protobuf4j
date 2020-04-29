@@ -23,7 +23,7 @@ import com.game37.protobuf4j.proto.utils.GlobalConfig;
 *
 **/
 @Mojo(name = "precompile", defaultPhase = LifecyclePhase.COMPILE, threadSafe = true, 
-					requiresDependencyResolution = ResolutionScope.COMPILE)
+					requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class PrecompileMojo extends AbstractMojo {
 	
 	@Parameter(defaultValue = "${project}", readonly = true)
