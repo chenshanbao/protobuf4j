@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -38,6 +39,84 @@ public class ClassModifyUtil {
 	private static Map<Integer,Predicate<CtField>> checkMap = new ConcurrentHashMap<Integer,Predicate<CtField>>();
 	
 	private static volatile boolean isOpenMultiThread = false;
+	
+	public static void preCompile(String targetFullClassName) throws Exception{
+		preCompile(targetFullClassName, null);
+	}
+	
+	public static void preCompile(String targetFullClassName
+								, String classSaveDir) throws Exception{
+				
+		if(targetFullClassName == null ||targetFullClassName.trim().length() == 0) {				
+			throw new RuntimeException("targetFullClassName is null");
+		}
+		
+		List<String> targetFullClassNameList = new ArrayList<String>(1);
+		targetFullClassNameList.add(targetFullClassName);
+		
+		preCompile(targetFullClassNameList, null, classSaveDir);
+		
+	}
+	
+	public static void preCompile(List<String> targetFullClassNameList
+			) throws Exception{
+		preCompile(targetFullClassNameList, null, null);
+	}
+	
+	public static void preCompile(List<String> targetFullClassNameList
+				, String classSaveDir) throws Exception{
+		preCompile(targetFullClassNameList, null, classSaveDir);
+	}
+	
+	public synchronized static void preCompile(List<String> targetFullClassNameList
+			, Set<String> annoClassSet, String classSaveDir) 
+			throws Exception{
+		
+		try {
+			if(targetFullClassNameList == null ||targetFullClassNameList.size() == 0) {				
+				throw new RuntimeException("targetFullClassNameList is null or size is zero");
+			}
+			
+			BiConsumer<String, Set<String>> con = 
+					FunctionUtil.wrapCheckedBiConsumer(ClassModifyUtil::visitClass);
+			targetFullClassNameList.forEach(temp-> con.accept(temp, annoClassSet));
+			
+			makeDynamicMethod(null, classSaveDir);
+		}finally {
+			list.clear();
+		}		
+		
+		
+	}
+	
+	public static void preCompileByPackScan(List<String> packScanList, 
+			Set<String> annoClassSet) throws Exception{		
+		preCompileByPackScan(packScanList, annoClassSet, null);
+	}
+	
+	public synchronized static void preCompileByPackScan(List<String> packScanList, 
+											Set<String> annoClassSet, String classSaveDir) throws Exception{		
+		try {
+			if(packScanList == null ||packScanList.size() == 0) {				
+				throw new RuntimeException("packScanList is null or size is zero");
+			}
+			if(annoClassSet == null ||annoClassSet.size() == 0) {				
+				throw new RuntimeException("annoClassSet is null or size is zero");
+			}
+			
+
+			List<String>  listClass = ClassSearchUtil.findClassName(packScanList);	
+			
+			BiConsumer<String, Set<String>> con = 
+					FunctionUtil.wrapCheckedBiConsumer(ClassModifyUtil::visitClass);
+			listClass.forEach(temp-> con.accept(temp, annoClassSet));
+			
+			makeDynamicMethod(annoClassSet, classSaveDir);
+		}finally {
+			list.clear();
+		}		
+	}
+	
 	
 	public static synchronized void visitAllClass(Consumer<String> consumer) {
 		list.forEach(temp->{

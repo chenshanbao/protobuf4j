@@ -88,16 +88,8 @@ public class PrecompileMain {
 		}
 		
 		
-		for(String className:classList) {			
-			try {
-				ClassModifyUtil.visitClass(className, annoSet);
-			} catch (Exception e) {
-				throw new MojoExecutionException("", e);
-			}
-		}
-		
 		try {
-			ClassModifyUtil.makeDynamicMethod(annoSet, outputDir);
+			ClassModifyUtil.preCompile(classList, annoSet, outputDir);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new MojoExecutionException("", e);
