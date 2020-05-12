@@ -4,9 +4,9 @@ Protobuf4j is a small and fast  serialization and deserialization java lib for g
 
 # Protobuf4j是一个小巧JAVA版的protobuf序列化和反序列化库，它具有一下特性：
 
-1，接近原生的protoc工具生成的java代码的序列化和反序列化速度，综合测试下来是jprotobuf效率的2-4倍。
-2，支持预编译，预编译的速度也很快，相比jprotobuf提升了不少。
-3，支持Set,Map集合
+1，接近原生的protoc工具生成的java代码的序列化和反序列化速度，综合测试下来是jprotobuf效率的2-4倍。<br/>
+2，支持预编译，预编译的速度也很快，相比jprotobuf提升了不少。<br/>
+3，支持Set,Map集合<br/>
 
 # 暂不支持的特性如下
 
@@ -22,7 +22,7 @@ Protobuf4j is a small and fast  serialization and deserialization java lib for g
   
 # 定义协议类
 
-@ProtobufClass
+@ProtobufClass<br/>
 public class UserResp {
 	
 	@ProtobufField
@@ -54,6 +54,7 @@ public class UserResp {
   
 # 直接使用方式
 
+<br/>
   private static void testSimple() throws Exception {
 		
 		String targetFullClassName = "pack.UserResp";
@@ -74,6 +75,7 @@ public class UserResp {
   
   # 使用包路径扫描的方式
   
+  <br/>
   private static void testPackScan() throws Exception {
 		
 		
