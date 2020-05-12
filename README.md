@@ -8,9 +8,10 @@ Protobuf4j is a small and fast  serialization and deserialization java lib for g
 2，支持预编译，预编译的速度也很快，相比jprotobuf提升了不少。<br/>
 3，支持Set,Map集合<br/>
 
-# 暂不支持的特性如下
+# 注意事项
 
-1，协议类如果打算被继承，访问修饰符必须是大于等于protected,(基于性能考虑，序列化反序列化的操作不使用反射，通常我们推荐使用聚合的方式来代替继承）。
+1，协议类如果打算被继承，访问修饰符必须是大于等于protected,(基于性能考虑，序列化反序列化的操作不使用反射，通常我们推荐使用聚合的方式来代替继承）。<br/>
+2，preCompile系列方法必须在项目启动时候最优先执行。<br/>
 
 # maven使用方式
 
