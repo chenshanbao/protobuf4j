@@ -14,11 +14,11 @@ Protobuf4j is a small and fast  serialization and deserialization java lib for g
 
 # maven使用方式
 
-  <dependency>
-    	  <groupId>com.game37</groupId>
-		  <artifactId>protobuf4j</artifactId>
-		  <version>1.0.0</version>
-  </dependency>
+  &lt;dependency&gt;
+    	  &lt;groupId&gt; com.game37 &lt;/groupId&gt;
+		  &lt;artifactId&gt; protobuf4j &lt;/artifactId&gt;
+		  &lt;version&gt; 1.0.0 &lt;/version&gt;
+  &lt;/dependency>
   
 # 定义协议类
 
